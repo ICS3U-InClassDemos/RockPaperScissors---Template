@@ -46,41 +46,12 @@ namespace RockPaperScissors
 
         private void rockButton_Click(object sender, EventArgs e)
         {
-            /// TODO Set the playerchoice value, show the appropriate image,
-            /// play a sound, wait for a second; repeat for the computer turn
-
+            //Set the playerchoice value, show the appropriate image
             playerChoice = "rock";
             playerImage.BackgroundImage = rockImage;
 
             ComputerTurn();
-
-            //determine the winner
-            if(playerChoice == cpuChoice)
-            {
-                resultImage.BackgroundImage = tieImage;
-                ties++;
-                tiesLabel.Text = $"Ties: {ties}";
-            }
-            else if (cpuChoice == "scissors")
-            {
-                resultImage.BackgroundImage = winImage;
-                wins++;
-                winsLabel.Text = $"Wins: {wins}";
-            }
-            else
-            {
-                resultImage.BackgroundImage = loseImage;
-                losses++;
-                lossesLabel.Text = $"Losses: {losses}";
-            }
-
-            gongPlayer.Play();
-            resultImage.Refresh();
-            Thread.Sleep(outcomePause);
-
-            playerImage.BackgroundImage = null;
-            cpuImage.BackgroundImage = null;
-            resultImage.BackgroundImage = null;
+            DetermineWinner();                       
         }
 
         private void paperButton_Click(object sender, EventArgs e)
@@ -88,37 +59,8 @@ namespace RockPaperScissors
             playerChoice = "paper";
             playerImage.BackgroundImage = paperImage;
 
-            int randValue = randGen.Next(1, 4);
-
             ComputerTurn();
-
-            //determine the winner
-            if (playerChoice == cpuChoice)
-            {
-                resultImage.BackgroundImage = tieImage;
-                ties++;
-                tiesLabel.Text = $"Ties: {ties}";
-            }
-            else if (cpuChoice == "rock")
-            {
-                resultImage.BackgroundImage = winImage;
-                wins++;
-                winsLabel.Text = $"Wins: {wins}";
-            }
-            else
-            {
-                resultImage.BackgroundImage = loseImage;
-                losses++;
-                lossesLabel.Text = $"Losses: {losses}";
-            }
-
-            gongPlayer.Play();
-            resultImage.Refresh();
-            Thread.Sleep(outcomePause);
-
-            playerImage.BackgroundImage = null;
-            cpuImage.BackgroundImage = null;
-            resultImage.BackgroundImage = null;
+            DetermineWinner();
         }
 
         private void scissorsButton_Click(object sender, EventArgs e)
@@ -127,34 +69,7 @@ namespace RockPaperScissors
             playerImage.BackgroundImage = scissorImage;
 
             ComputerTurn();
-
-            //determine the winner
-            if (playerChoice == cpuChoice)
-            {
-                resultImage.BackgroundImage = tieImage;
-                ties++;
-                tiesLabel.Text = $"Ties: {ties}";
-            }
-            else if (cpuChoice == "paper")
-            {
-                resultImage.BackgroundImage = winImage;
-                wins++;
-                winsLabel.Text = $"Wins: {wins}";
-            }
-            else
-            {
-                resultImage.BackgroundImage = loseImage;
-                losses++;
-                lossesLabel.Text = $"Losses: {losses}";
-            }
-
-            gongPlayer.Play();
-            resultImage.Refresh();
-            Thread.Sleep(outcomePause);
-
-            playerImage.BackgroundImage = null;
-            cpuImage.BackgroundImage = null;
-            resultImage.BackgroundImage = null;
+            DetermineWinner();
         }
 
         public void ComputerTurn()
@@ -181,6 +96,38 @@ namespace RockPaperScissors
             playerImage.Refresh();
             cpuImage.Refresh();
             Thread.Sleep(choicePause);
+        }
+
+        public void DetermineWinner()
+        {
+            if (playerChoice == cpuChoice)
+            {
+                resultImage.BackgroundImage = tieImage;
+                ties++;
+                tiesLabel.Text = $"Ties: {ties}";
+            }
+            else if ((playerChoice == "rock" && cpuChoice == "scissors")
+                || (playerChoice == "paper" && cpuChoice == "rock")
+                || (playerChoice == "scissors" && cpuChoice == "paper")) 
+            {
+                resultImage.BackgroundImage = winImage;
+                wins++;
+                winsLabel.Text = $"Wins: {wins}";
+            }
+            else
+            {
+                resultImage.BackgroundImage = loseImage;
+                losses++;
+                lossesLabel.Text = $"Losses: {losses}";
+            }
+
+            gongPlayer.Play();
+            resultImage.Refresh();
+            Thread.Sleep(outcomePause);
+
+            playerImage.BackgroundImage = null;
+            cpuImage.BackgroundImage = null;
+            resultImage.BackgroundImage = null;
         }
     }
 }
