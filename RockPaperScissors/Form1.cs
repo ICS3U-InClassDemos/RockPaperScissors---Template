@@ -46,16 +46,150 @@ namespace RockPaperScissors
 
         private void rockButton_Click(object sender, EventArgs e)
         {
-            /// TODO Set the playerchoice value, show the appropriate image,
-            /// play a sound, wait for a second; repeat for the computer turn 
+            // Set the playerchoice values
+            playerChoice = "rock";
+            playerImage.Image = rockImage;
+
+            ComputerTurn();
+
+            // determine winner
+            if (cpuChoice == "scissor")
+            {
+                resultImage.Image = winImage;
+                wins++;
+                winsLabel.Text = $"Wins: {wins}";
+            }
+            else if (cpuChoice == "paper")
+            {
+                resultImage.Image = loseImage;
+                losses++;
+                lossesLabel.Text = $"Losses: {losses}";
+            }
+            else
+            {
+                resultImage.Image = tieImage;
+                ties++;
+                tiesLabel.Text = $"Ties: {ties}";
+            }
+
+            playerImage.Refresh();
+            cpuImage.Refresh(); 
+            resultImage.Refresh();  
+            Thread.Sleep(1000);
+            gongPlayer.Play();
+           
+            Thread.Sleep(2000);
+            playerImage.Image = null;
+            cpuImage.Image = null;
+            resultImage.Image = null;
         }
 
         private void paperButton_Click(object sender, EventArgs e)
         {
+            // Set the playerchoice values
+            playerChoice = "paper";
+            playerImage.Image = paperImage;
 
+            ComputerTurn();
+
+            // determine winner
+            if (cpuChoice == "rock")
+            {
+                resultImage.Image = winImage;
+                wins++;
+                winsLabel.Text = $"Wins: {wins}";
+            }
+            else if (cpuChoice == "scissor")
+            {
+                resultImage.Image = loseImage;
+                losses++;
+                lossesLabel.Text = $"Losses: {losses}";
+            }
+            else
+            {
+                resultImage.Image = tieImage;
+                ties++;
+                tiesLabel.Text = $"Ties: {ties}";
+            }
+
+            playerImage.Refresh();
+            cpuImage.Refresh();
+            resultImage.Refresh();
+            Thread.Sleep(1000);
+            gongPlayer.Play();
+
+            Thread.Sleep(2000);
+            playerImage.Image = null;
+            cpuImage.Image = null;
+            resultImage.Image = null;
         }
 
         private void scissorsButton_Click(object sender, EventArgs e)
+        {
+            // Set the playerchoice values
+            playerChoice = "scissor";
+            playerImage.Image = scissorImage;
+
+            ComputerTurn();
+
+            // determine winner
+            if (cpuChoice == "paper")
+            {
+                resultImage.Image = winImage;
+                wins++;
+                winsLabel.Text = $"Wins: {wins}";
+            }
+            else if (cpuChoice == "rock")
+            {
+                resultImage.Image = loseImage;
+                losses++;
+                lossesLabel.Text = $"Losses: {losses}";
+            }
+            else
+            {
+                resultImage.Image = tieImage;
+                ties++;
+                tiesLabel.Text = $"Ties: {ties}";
+            }
+
+            playerImage.Refresh();
+            cpuImage.Refresh();
+            resultImage.Refresh();
+            Thread.Sleep(1000);
+            gongPlayer.Play();
+
+            Thread.Sleep(2000);
+            playerImage.Image = null;
+            cpuImage.Image = null;
+            resultImage.Image = null;
+
+        }
+
+        public void ComputerTurn()
+        {
+            jabPlayer.Play();
+
+            // Set cpu values
+            int choice = randGen.Next(1, 4);
+
+            if (choice == 1)
+            {
+                cpuChoice = "rock";
+                cpuImage.Image = rockImage;
+            }
+            else if (choice == 2)
+            {
+                cpuChoice = "paper";
+                cpuImage.Image = paperImage;
+            }
+            else
+            {
+                cpuChoice = "scissor";
+                cpuImage.Image = scissorImage;
+            }
+        }
+
+        public void DetermineWinner()
         {
 
         }

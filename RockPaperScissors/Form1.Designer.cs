@@ -176,6 +176,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImage = global::RockPaperScissors.Properties.Resources.dojo700x390;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(828, 351);
             this.Controls.Add(this.cpuImage);
             this.Controls.Add(this.playerImage);
