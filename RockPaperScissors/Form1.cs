@@ -50,33 +50,7 @@ namespace RockPaperScissors
             playerImage.BackgroundImage = rockImage;
 
             CpuTurn();
-
-            gongPlayer.Play();
-
-            if (cpuChoice == "scissors")
-            {
-                wins++;
-                resultImage.BackgroundImage = winImage;
-                winsLabel.Text = $"Wins: {wins}";
-            }
-            else if (cpuChoice == "paper")
-            {
-                losses++;
-                resultImage.BackgroundImage = loseImage;
-                lossesLabel.Text = $"Losses: {losses}";
-            }
-            else
-            {
-                ties++;
-                resultImage.BackgroundImage = tieImage;
-                tiesLabel.Text = $"Ties: {ties}";
-            }
-
-            Refresh();
-            Thread.Sleep(outcomePause);
-            resultImage.BackgroundImage = null;
-            playerImage.BackgroundImage = null;
-            cpuImage.BackgroundImage = null;
+            DetermineWinner();
         }
 
         private void paperButton_Click(object sender, EventArgs e)
@@ -85,33 +59,7 @@ namespace RockPaperScissors
             playerImage.BackgroundImage = paperImage;
 
             CpuTurn();
-
-            gongPlayer.Play();
-
-            if (cpuChoice == "rock")
-            {
-                wins++;
-                resultImage.BackgroundImage = winImage;
-                winsLabel.Text = $"Wins: {wins}";
-            }
-            else if (cpuChoice == "scissors")
-            {
-                losses++;
-                resultImage.BackgroundImage = loseImage;
-                lossesLabel.Text = $"Losses: {losses}";
-            }
-            else
-            {
-                ties++;
-                resultImage.BackgroundImage = tieImage;
-                tiesLabel.Text = $"Ties: {ties}";
-            }
-
-            Refresh();
-            Thread.Sleep(outcomePause);
-            resultImage.BackgroundImage = null;
-            playerImage.BackgroundImage = null;
-            cpuImage.BackgroundImage = null;
+            DetermineWinner();
         }
 
         private void scissorsButton_Click(object sender, EventArgs e)
@@ -120,33 +68,7 @@ namespace RockPaperScissors
             playerImage.BackgroundImage = scissorImage;
 
             CpuTurn();
-
-            gongPlayer.Play();
-
-            if (cpuChoice == "paper")
-            {
-                wins++;
-                resultImage.BackgroundImage = winImage;
-                winsLabel.Text = $"Wins: {wins}";
-            }
-            else if (cpuChoice == "rock")
-            {
-                losses++;
-                resultImage.BackgroundImage = loseImage;
-                lossesLabel.Text = $"Losses: {losses}";
-            }
-            else
-            {
-                ties++;
-                resultImage.BackgroundImage = tieImage;
-                tiesLabel.Text = $"Ties: {ties}";
-            }
-
-            Refresh();
-            Thread.Sleep(outcomePause);
-            resultImage.BackgroundImage = null;
-            playerImage.BackgroundImage = null;
-            cpuImage.BackgroundImage = null;
+            DetermineWinner();
         }
 
         public void CpuTurn()
@@ -168,6 +90,38 @@ namespace RockPaperScissors
                 cpuChoice = "scissors";
                 cpuImage.BackgroundImage = scissorImage;
             }
+        }
+
+        public void DetermineWinner()
+        {
+            gongPlayer.Play();
+
+            if (playerChoice == cpuChoice)
+            {
+                ties++;
+                resultImage.BackgroundImage = tieImage;
+                tiesLabel.Text = $"Ties: {ties}";
+            }
+            else if (playerChoice == "paper" && cpuChoice == "rock" ||
+                playerChoice == "rock" && cpuChoice == "scissors" ||
+                playerChoice == "scissors" && cpuChoice == "paper")
+            {
+                wins++;
+                resultImage.BackgroundImage = winImage;
+                winsLabel.Text = $"Wins: {wins}";
+            }
+            else 
+            {
+                losses++;
+                resultImage.BackgroundImage = loseImage;
+                lossesLabel.Text = $"Losses: {losses}";
+            }
+
+            Refresh();
+            Thread.Sleep(outcomePause);
+            resultImage.BackgroundImage = null;
+            playerImage.BackgroundImage = null;
+            cpuImage.BackgroundImage = null;
         }
     }
 }
